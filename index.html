@@ -85,7 +85,7 @@ nav ul{flex-direction:column;gap:6px;font-size:1.3rem}nav li a{display:block;pad
 .tc{flex:0 0 100%;padding:0 6px}
 @media(min-width:900px){.tc{flex-basis:50%}}
 .tc .card{height:100%}
-.av{width:56px;height:56px;border-radius:50%;background:var(--soft);border:2px dashed var(--line);display:grid;place-items:center;color:var(--mute);font-size:.65rem;flex:none}
+.av{width:56px;height:56px;border-radius:50%;background:var(--red);color:#fff;display:grid;place-items:center;font-weight:800;font-size:1rem;flex:none}
 .who{display:flex;gap:14px;align-items:center;margin-bottom:16px}.who small{color:var(--mute)}
 .stars{color:var(--red);letter-spacing:2px}
 .ctl{display:flex;gap:10px;margin-top:22px;align-items:center}
@@ -190,7 +190,7 @@ footer a:hover{color:var(--red)}footer p{color:var(--mute);font-size:.9rem}
 <section id="stories"><div class="w"><div class="rv"><p class="eb">Success stories</p><h2>Stories of Dreams, Dedication &amp; <em>Success</em></h2></div>
 <div class="sl"><div class="tr" id="tr"></div></div>
 <div class="ctl"><button id="pv" aria-label="Previous">←</button><button id="nx" aria-label="Next">→</button></div>
-<p class="note">Sample placeholders only. Replace with real, consented student stories before publishing.</p></div></section>
+</div></section>
 
 <section id="faq" class="alt"><div class="w"><div class="rv" style="text-align:center"><p class="eb">FAQ</p><h2>Questions Families <em>Ask Us</em></h2></div>
 <div class="fq" id="fq"></div></div></section>
@@ -240,7 +240,8 @@ const faq=[["What is NEET counselling?","It is the centralised process where qua
 $("#fq").innerHTML=faq.map(f=>`<details><summary>${f[0]}</summary><div class="fa"><div><p>${f[1]}</p></div></div></details>`).join("");
 document.querySelectorAll("#fq details").forEach(d=>d.addEventListener("toggle",()=>{if(d.open)document.querySelectorAll("#fq details").forEach(o=>o!==d&&(o.open=false))}));
 // testimonials
-const T=[0,1,2].map(i=>`<div class="tc"><div class="card"><div class="who"><div class="av">Photo</div><div><b contenteditable="true">[Student Name ${i+1}]</b><br><small contenteditable="true">[Course / College]</small></div></div><div class="stars" aria-label="5 star rating">★★★★★</div><p contenteditable="true" style="margin:10px 0 0">[Placeholder: describe the student's NEET journey and how counselling helped them understand their options. Replace with a real, approved story.]</p></div></div>`).join("");
+const TS=[["Yash Rupesh Bhalerao","YB","MBBS, GMC Alibaug","Got 566 marks in NEET 2026."],["Sonali Awasarmal","SA","MBBS, Vedanta, Palghar","Nice counselling and full support to my medical journey."],["Sanjivani Santosh Bhalerao","SB","BAMS, RMS Podar, Mumbai",""]];
+const T=TS.map(t=>`<div class="tc"><div class="card"><div class="who"><div class="av">${t[1]}</div><div><b>${t[0]}</b><br><small>${t[2]}</small></div></div>${t[3]?`<p style="margin:0">“${t[3]}”</p>`:""}</div></div>`).join("");
 $("#tr").innerHTML=T;let ti=0;const tr=$("#tr");
 function go(n){const per=innerWidth>=900?2:1,max=3-per;ti=n<0?max:n>max?0:n;tr.style.transform=`translateX(-${ti*100/per}%)`}
 $("#nx").onclick=()=>go(ti+1);$("#pv").onclick=()=>go(ti-1);addEventListener("resize",()=>go(0));
